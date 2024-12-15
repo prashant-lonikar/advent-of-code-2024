@@ -153,4 +153,40 @@ for i, row in enumerate(data_matrix):
                 data_matrix[i][j] = "X"
 
 
-print(xmas_count)
+print(f"Part 1 answer: {xmas_count}")
+
+# Part 2
+
+xmas_count_part_2 = 0
+
+for i, row in enumerate(data_matrix):
+    print(f"Looking at row {i}:")
+    for j, char in enumerate(row):
+        if (
+            char == "A"
+        ):  # fixing the starting point to A otherwise we'll end up multi-counting
+
+            print(f"\tA found at position {j}")
+
+            try:
+                if i - 1 >= 0 and j - 1 >= 0:
+                    if (
+                        data_matrix[i - 1][j - 1] == "M"
+                        and data_matrix[i + 1][j + 1] == "S"
+                    ) or (
+                        data_matrix[i - 1][j - 1] == "S"
+                        and data_matrix[i + 1][j + 1] == "M"
+                    ):
+                        if (
+                            data_matrix[i - 1][j + 1] == "M"
+                            and data_matrix[i + 1][j - 1] == "S"
+                        ) or (
+                            data_matrix[i - 1][j + 1] == "S"
+                            and data_matrix[i + 1][j - 1] == "M"
+                        ):
+                            xmas_count_part_2 += 1
+            except:
+                print("Continue")
+
+
+print(f"Part 2 answer: {xmas_count_part_2}")
